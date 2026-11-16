@@ -1,27 +1,14 @@
+from config import header, url
 import requests
-import os
-from dotenv import load_dotenv
 import json
+from tokens import manage_conversation
 
-load_dotenv()
 messages = [
   {
     "role": "system",
     "content": "You are a friendly technical interviewer. ask user programming theory questions, ask only one question at a time. evaluate the answer. provide feedback and suggestions"
   }
 ]
-
-api_key = os.getenv("GROQ_API_KEY")
-
-if not api_key:
-  raise ValueError("API key not found !")
-
-url = "https://api.groq.com/openai/v1/chat/completions"
-
-header = {
-  "Authorization": f"Bearer {api_key}",
-  "Content-Type": "application/json"
-}
 
 print("------welcome to the ChatBot-------")
 print("use q/quit to exit from ChatBot")
@@ -34,6 +21,7 @@ while True:
     "role" : "user",
     "content" : user
   })
+  messages = manage_conversation(messages=messages,limit=50)
   data = {
     "model" : "openai/gpt-oss-20b",
     "messages" : messages,
