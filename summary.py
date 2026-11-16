@@ -28,6 +28,11 @@ def summarize_conversation(old_messages):
             that the user did not mention.
           - Distinguish confirmed facts from uncertain information.
           - Preserve updated information when the user corrects an earlier statement.
+          - When new information contradicts an older fact, use the latest explicit user statement.
+          - Update the existing fact instead of keeping contradictory versions.
+          - Preserve the timeline when an older status is useful.
+          - Do not assume proficiency from statements such as "I know Java".
+          - Never convert a user's basic statement into an achievement or expertise.
           """
       },
       {
